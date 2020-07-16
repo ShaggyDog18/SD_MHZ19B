@@ -10,11 +10,11 @@ License: [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 MH-Z19B NDIR infrared gas module is a common type, small size sensor, using non-dispersive infrared (NDIR) principle to detect the existence of CO2 in the air, with good selectivity, non-oxygen dependent and long life. Built-in temperature compensation; and it has UART output and PWM output. 
 
-This library features access to all module features though an abstracted class and methods to manage the module implemented in user-level functionality.
+This compact library features access to all module features though an abstracted class and methods to manage the module implemented in user-level functionality.
 
 The library does not work with PWM module signal. Communicates with the module by Hardware or Software UART.
 
-CO2 Measurement Range 0-2000ppm or 0-5000ppm. Accuracy: ±(50ppm+3%).
+CO2 Measurement Range: 0-2000ppm or 0-5000ppm. Accuracy: ±(50ppm+3%).
 
 ## Library Methods
 
