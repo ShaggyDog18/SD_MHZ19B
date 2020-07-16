@@ -111,8 +111,8 @@ uint16_t SD_MHZ19B::getDetectionRange(void) {   // last byte is a pre-calculated
   _sendCmd( cmd );
 
   if( _readData() ) return _unionFrame.buffer[3];
+*/  
   return false;
-*/
 }
 
 
