@@ -1,0 +1,20 @@
+/*
+ * 
+ * byte Commands[14] = {
+    120, // 0 Recovery Reset        Changes operation mode and performs MCU reset
+    121,  // 1 ABC Mode ON/OFF       Turns ABC logic on or off (b[3] == 0xA0 - on, 0x00 - off)
+    125,  // 2 Get ABC logic status  (1 - enabled, 0 - disabled)  
+    132,  // 3 Raw CO2
+    133,  // 4 Temp float, CO2 Unlimited
+    134,  // 5 Temp integer, CO2 limited
+    135,  // 6 Zero Calibration
+    136,  // 7 Span Calibration
+    153,  // 8 Range
+    155,  // 9 Get Range
+    156,  // 10 Get Background CO2
+    160,  // 11 Get Firmware Version
+    162,  // 12 Get Last Response
+    163   // 13 Get Temp Calibration
+ * 
+ * 
+ */

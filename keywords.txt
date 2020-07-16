@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map SD_MHZ19B
+B#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SD_MHZ19B	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+calibrateZeroPoint	KEYWORD2
+calibrateSpanPoint	KEYWORD2
+setAutoCalibration	KEYWORD2
+getABCstatus	KEYWORD2
+setDetectionRange	KEYWORD2
+getPPM	KEYWORD2
+getTemp	KEYWORD2
+getTemperature	KEYWORD2
+getStatus	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
