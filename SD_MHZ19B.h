@@ -166,7 +166,7 @@ union unionFrame_t {
   uint8_t buffer[ sizeof(MHZ19Bstruct_t) ];  // takes 10 bytes on the 16 and 32bit pltforms
 } _unionFrame;
 
-  // read data from COM pport
+  // read data from Serial stream
   bool _readData(void);
 
   // calculate check sum for command
