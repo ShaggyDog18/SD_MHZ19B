@@ -14,12 +14,12 @@ This library features access to all module features though an abstracted class a
 
 The library does not work with PWM module signal. Communicates with the module by Hardware or Software UART.
 
-CO2 Measurement Range 0~2000ppm or 0~5000ppm. Accuracy: ±(50ppm+3%).
+CO2 Measurement Range 0-2000ppm or 0-5000ppm. Accuracy: ±(50ppm+3%).
 
 ## Library Methods
 
 - `SD_MHZ19B( Stream& serial )` - Class Constructor
-- `~SD_MHZ19B()` - Class Distructor
+- `~SD_MHZ19B()` - Class Destructor
 - `uint16_t getPPM(void)` - read data from the module; returns value of CO2 concentration in ppm; Data are verified and valid (validate by calculating checkSum of the data received). Retunt `FALSE` i.e. ZERO value if communication or CRC error.
 - `int8_t getTemp(void)` - returns module temperature in degrees Celcium. Should be called after getPPM() function; otherwise will return a previous value. Rather inaccurate ±2*C; is used for internal compensation.
 - `void setAutoCalibration( bool _autoCalib )` - toggles Auto Calibration (Automatic Baseline Correction - ABC) ON/OFF. Set `true` for Enabled/ON; `false` for Disabled/OFF (default). Refer to Auto Calibration Notes below.
