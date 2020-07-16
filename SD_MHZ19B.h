@@ -20,7 +20,7 @@ CO2 Measurement Range 0~2000ppm or 0~5000ppm. Accuracy: ±(50ppm+3%).
 ## Library Methods
 
 - `SD_MHZ19B( Stream& serial )` - Class Constructor
-- `~SD_MHZ19B()` - Class Distructor
+- `~SD_MHZ19B()` - Class Destructor
 - `uint16_t getPPM(void)` - read data from the module; returns value of CO2 concentration in ppm; Data are verified and valid (validate by calculating checkSum of the data received). Retunt `FALSE` i.e. ZERO value if communication or CRC error.
 - `int8_t getTemp(void)` - returns module temperature in degrees Celcium. Should be called after getPPM() function; otherwise will  return a previous value. Rather inaccurate ±2*C; is used for internal compensation.
 - `void setAutoCalibration( bool _autoCalib )` - toggles Auto Calibration (Automatic Baseline Correction - ABC) ON/OFF. Set `true` for Enabled/ON; `false` for Disabled/OFF (default). Refer to Auto Calibration Notes below.
@@ -134,12 +134,12 @@ The value is available after successful getPPM() reading only; otherwise, will r
 uint8_t getStatus(void);
 
 
-// experimental; work in ptogress
+// experimental; undocumented; work in ptogress
 uint16_t getDetectionRange(void);
 
 
 /*
-Reads warming status - not documented, does not work, always return warming up... 
+Reads warming status - undocumented, does not work, always return warming up... 
 Returns status, verified and valid (validate by calculating checkSum of the data received).
 The value is available after successful PPM reading only; otherwise, will return previous value; to be called after getPPM() only.
 */
@@ -151,7 +151,7 @@ private:
 
 #define SIZEOF_FRAME 9
 
-struct MHZ19BframeStruct_t {  // 9 bytes -  in Initiative Upload mode
+struct MHZ19Bstruct_t {  // 9 bytes -  in Initiative Upload mode
   uint8_t  frameHeader[2];
   uint16_t co2concPPM;
   uint8_t  temperature;  // not corrected, have to subtruct 40
