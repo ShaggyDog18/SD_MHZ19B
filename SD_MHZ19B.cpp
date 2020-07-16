@@ -116,62 +116,6 @@ uint16_t SD_MHZ19B::getDetectionRange(void) {   // last byte is a pre-calculated
 }
 
 
-bool SD_MHZ19B::_readData(void) {
-  delay(20);
-  // expect data header to fly in
-  while( (_serial.peek() != 0xFF) && _serial.available() ) {
-    _serial.read();  // read untill we get the data header 0xff
-  }
-
-  #ifdef DEBUG
-    Serial.print("available to read: "); Serial.println( _serial.available() );
-    //Serial.print(("Sizeof frame struct:"); Serial.println( sizeof(MHZ19frameStruct_t) ); // debug only
-  #endif
-
-  if( _serial.available() < SIZEOF_FRAME ) {  //overall/at least 9 bytes should be available
-    #ifdef DEBUG
-	   Serial.println( "Err:Insufficiend buffer length" );
-    #endif
-    return false;
-  }
-
-  // read the entire buffer
-  _serial.readBytes( _unionFrame.buffer, SIZEOF_FRAME );
-
-  #ifdef DEBUG
-    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19B.header[0], HEX );
-    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19B.header[1], HEX ); 
-  #endif
-
-  // re-sort the buffer: swap high and low bytes since they are not in the "machine" order 
-  uint8_t tmp;
-  tmp = _unionFrame.buffer[2];
-  _unionFrame.buffer[2] = _unionFrame.buffer[3];
-  _unionFrame.buffer[3] = tmp;
-
-  // Debug - print received buffer
-  #ifdef DEBUG  
-    Serial.println("Read from module:");
-    for( uint8_t i=0; i < SIZEOF_FRAME; i++ ) {
-      Serial.print(":"); Serial.print( _unionFrame.buffer[i], HEX );
-    }
-    Serial.println();
-  #endif
-
-  uint8_t calcCheckSum = 0; // refer to datasheet for check sum calculation
-  for( uint8_t i=1; i < SIZEOF_FRAME-1; i++ ) calcCheckSum += _unionFrame.buffer[i];
-  calcCheckSum = (~calcCheckSum) + 1; 
-
-  if( calcCheckSum != _unionFrame.MHZ19B.checkSum ) {
-    #ifdef DEBUG
-      Serial.println(  "Check Sum Error" );
-    #endif
-    return false;
-  }
-  return true;
-}
-
-
 // returns temperature in degrees Celcium. Should be called after getPPM() function; otherwise, will return a previous value.
 int8_t SD_MHZ19B::getTemp(void) {
   return ((int8_t)_unionFrame.MHZ19B.temperature - 40);   // corrected temperature
@@ -241,6 +185,62 @@ bool SD_MHZ19B::setDetectionRange( uint16_t _detectionRange ) {
 //----------------------------
 // internal protected methods
 //----------------------------
+bool SD_MHZ19B::_readData(void) {
+  delay(20);
+  // expect data header to fly in
+  while( (_serial.peek() != 0xFF) && _serial.available() ) {
+    _serial.read();  // read untill we get the data header 0xff
+  }
+
+  #ifdef DEBUG
+    Serial.print("available to read: "); Serial.println( _serial.available() );
+    //Serial.print(("Sizeof frame struct:"); Serial.println( sizeof(MHZ19frameStruct_t) ); // debug only
+  #endif
+
+  if( _serial.available() < SIZEOF_FRAME ) {  //overall/at least 9 bytes should be available
+    #ifdef DEBUG
+	   Serial.println( "Err:Insufficiend buffer length" );
+    #endif
+    return false;
+  }
+
+  // read the entire buffer
+  _serial.readBytes( _unionFrame.buffer, SIZEOF_FRAME );
+
+  #ifdef DEBUG
+    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19B.header[0], HEX );
+    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19B.header[1], HEX ); 
+  #endif
+
+  // re-sort the buffer: swap high and low bytes since they are not in the "machine" order 
+  uint8_t tmp;
+  tmp = _unionFrame.buffer[2];
+  _unionFrame.buffer[2] = _unionFrame.buffer[3];
+  _unionFrame.buffer[3] = tmp;
+
+  // Debug - print received buffer
+  #ifdef DEBUG  
+    Serial.println("Read from module:");
+    for( uint8_t i=0; i < SIZEOF_FRAME; i++ ) {
+      Serial.print(":"); Serial.print( _unionFrame.buffer[i], HEX );
+    }
+    Serial.println();
+  #endif
+
+  uint8_t calcCheckSum = 0; // refer to datasheet for check sum calculation
+  for( uint8_t i=1; i < SIZEOF_FRAME-1; i++ ) calcCheckSum += _unionFrame.buffer[i];
+  calcCheckSum = (~calcCheckSum) + 1; 
+
+  if( calcCheckSum != _unionFrame.MHZ19B.checkSum ) {
+    #ifdef DEBUG
+      Serial.println(  "Check Sum Error" );
+    #endif
+    return false;
+  }
+  return true;
+}
+
+
 uint8_t SD_MHZ19B::_calcCmdCheckSum( const uint8_t _cmd[] ) {
   uint8_t checkSum = 0x01;  // byte #1 is always 0x01 in the command
 
