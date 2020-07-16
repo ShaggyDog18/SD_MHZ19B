@@ -139,8 +139,8 @@ bool SD_MHZ19B::_readData(void) {
   _serial.readBytes( _unionFrame.buffer, SIZEOF_FRAME );
 
   #ifdef DEBUG
-    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19B.frameHeader[0], HEX );
-    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19B.frameHeader[1], HEX ); 
+    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19B.header[0], HEX );
+    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19B.header[1], HEX ); 
   #endif
 
   // re-sort the buffer: swap high and low bytes since they are not in the "machine" order 

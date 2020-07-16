@@ -152,7 +152,7 @@ private:
 #define SIZEOF_FRAME 9
 
 struct MHZ19Bstruct_t {  // 9 bytes -  in Initiative Upload mode
-  uint8_t  frameHeader[2];
+  uint8_t  header[2];
   uint16_t co2concPPM;
   uint8_t  temperature;  // not corrected, have to subtruct 40
   uint8_t  status;
