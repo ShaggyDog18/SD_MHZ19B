@@ -40,11 +40,11 @@ This function is usually suitable for indoor air quality monitor such as offices
 ## Safe levels of CO2
 
 | CO2 Level, ppm | Description                                                |
-| ------------- | ---------------------------------------------------------- |
-| `250 - 400`   | Normal background concentration in outdoor ambient air |
-| `400 - 1,000` | Concentrations typical of occupied indoor spaces with good air exchange |
-| `1,000-2,000` | Complaints of drowsiness and poor air. |
-| `2,000-5,000` | Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate... |
+| -------------| ---------------------------------------------------------- |
+| `250 - 400`  | Normal background concentration in outdoor ambient air |
+| `400 - 1,000`| Concentrations typical of occupied indoor spaces with good air exchange |
+| `1,000-2,000`| Complaints of drowsiness and poor air. |
+| `2,000-5,000`| Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate... |
 
 ## Compatibility
 
