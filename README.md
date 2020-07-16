@@ -10,16 +10,16 @@ License: [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 MH-Z19B NDIR infrared gas module is a common type, small size sensor, using non-dispersive infrared (NDIR) principle to detect the existence of CO2 in the air, with good selectivity, non-oxygen dependent and long life. Built-in temperature compensation; and it has UART output and PWM output. 
 
-This library features access to all module features though an abstracted class and methods to manage the module implemented in user-level functionality.
+This compact library features access to all module features though an abstracted class and methods to manage the module implemented in user-level functionality.
 
 The library does not work with PWM module signal. Communicates with the module by Hardware or Software UART.
 
-CO2 Measurement Range 0~2000ppm or 0~5000ppm. Accuracy: ±(50ppm+3%).
+CO2 Measurement Range: 0-2000ppm or 0-5000ppm. Accuracy: ±(50ppm+3%).
 
 ## Library Methods
 
 - `SD_MHZ19B( Stream& serial )` - Class Constructor
-- `~SD_MHZ19B()` - Class Distructor
+- `~SD_MHZ19B()` - Class Destructor
 - `uint16_t getPPM(void)` - read data from the module; returns value of CO2 concentration in ppm; Data are verified and valid (validate by calculating checkSum of the data received). Retunt `FALSE` i.e. ZERO value if communication or CRC error.
 - `int8_t getTemp(void)` - returns module temperature in degrees Celcium. Should be called after getPPM() function; otherwise will return a previous value. Rather inaccurate ±2*C; is used for internal compensation.
 - `void setAutoCalibration( bool _autoCalib )` - toggles Auto Calibration (Automatic Baseline Correction - ABC) ON/OFF. Set `true` for Enabled/ON; `false` for Disabled/OFF (default). Refer to Auto Calibration Notes below.
@@ -39,10 +39,12 @@ This function is usually suitable for indoor air quality monitor such as offices
 
 ## Safe levels of CO2
 
-| 250 - 400ppm    | Normal background concentration in outdoor ambient air |
-| 400 - 1,000ppm  | Concentrations typical of occupied indoor spaces with good air exchange |
-| 1,000-2,000ppm  | Complaints of drowsiness and poor air. |
-| 2,000-5,000 ppm | Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate and slight nausea may also be present. |
+| CO2 Level, ppm | Description                                                |
+| -------------| ---------------------------------------------------------- |
+| `250 - 400`  | Normal background concentration in outdoor ambient air |
+| `400 - 1,000`| Concentrations typical of occupied indoor spaces with good air exchange |
+| `1,000-2,000`| Complaints of drowsiness and poor air. |
+| `2,000-5,000`| Headaches, sleepiness and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate... |
 
 ## Compatibility
 
