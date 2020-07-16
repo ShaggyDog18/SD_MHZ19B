@@ -183,7 +183,7 @@ bool SD_MHZ19B::setDetectionRange( uint16_t _detectionRange ) {
 }
 
 //----------------------------
-// internal protected methods
+// internal private methods
 //----------------------------
 bool SD_MHZ19B::_readData(void) {
   delay(20);
