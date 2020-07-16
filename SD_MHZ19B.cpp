@@ -81,7 +81,7 @@ uint16_t SD_MHZ19B::getPPM(void) {
   uint8_t cmd[4] = {0x86, 0x00, 0x00, 0x79};  // last byte is a checkSum
   _sendCmd( cmd );
 
-  if( _readData() ) return _unionFrame.MHZ19Bframe.co2concPPM;
+  if( _readData() ) return _unionFrame.MHZ19B.co2concPPM;
   return false;  // return 0
 }
 
@@ -93,7 +93,7 @@ bool SD_MHZ19B::getABCstatus(void) {   // last byte is a pre-calculated checkSum
   //Serial.print( "getABCstatus check sum" ); Serial.println( cmd[3], HEX);
   _sendCmd( cmd );
 
-  if( _readData() ) return (bool) _unionFrame.MHZ19Bframe.ABCstatus;
+  if( _readData() ) return (bool) _unionFrame.MHZ19B.ABCstatus;
 
   #ifdef DEBUG   
     Serial.println( "Error getting ABC Status" );
@@ -139,8 +139,8 @@ bool SD_MHZ19B::_readData(void) {
   _serial.readBytes( _unionFrame.buffer, SIZEOF_FRAME );
 
   #ifdef DEBUG
-    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19Bframe.frameHeader[0], HEX );
-    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19Bframe.frameHeader[1], HEX ); 
+    Serial.print("MH-Z19 Header:"); Serial.print( _unionFrame.MHZ19B.frameHeader[0], HEX );
+    Serial.print( ":" ); Serial.println( _unionFrame.MHZ19B.frameHeader[1], HEX ); 
   #endif
 
   // re-sort the buffer: swap high and low bytes since they are not in the "machine" order 
@@ -162,7 +162,7 @@ bool SD_MHZ19B::_readData(void) {
   for( uint8_t i=1; i < SIZEOF_FRAME-1; i++ ) calcCheckSum += _unionFrame.buffer[i];
   calcCheckSum = (~calcCheckSum) + 1; 
 
-  if( calcCheckSum != _unionFrame.MHZ19Bframe.checkSum ) {
+  if( calcCheckSum != _unionFrame.MHZ19B.checkSum ) {
     #ifdef DEBUG
       Serial.println(  "Check Sum Error" );
     #endif
@@ -174,14 +174,14 @@ bool SD_MHZ19B::_readData(void) {
 
 // returns temperature in degrees Celcium. Should be called after getPPM() function; otherwise, will return a previous value.
 int8_t SD_MHZ19B::getTemp(void) {
-  return ((int8_t)_unionFrame.MHZ19Bframe.temperature - 40);   // corrected temperature
+  return ((int8_t)_unionFrame.MHZ19B.temperature - 40);   // corrected temperature
 }
 
 
 // undocumented features
 // returns status of the module. Should be called after getPPM() function; otherwise, will return a previous value.
 uint8_t SD_MHZ19B::getStatus(void) {
-  return _unionFrame.MHZ19Bframe.status;
+  return _unionFrame.MHZ19B.status;
 }
 
 

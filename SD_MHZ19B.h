@@ -162,8 +162,8 @@ struct MHZ19Bstruct_t {  // 9 bytes -  in Initiative Upload mode
 };
 
 union unionFrame_t {
-  MHZ19BframeStruct_t MHZ19Bframe;
-  uint8_t buffer[ sizeof(MHZ19BframeStruct_t) ];  // takes 10 bytes on the 16 and 32bit pltforms
+  MHZ19Bstruct_t MHZ19B;
+  uint8_t buffer[ sizeof(MHZ19Bstruct_t) ];  // takes 10 bytes on the 16 and 32bit pltforms
 } _unionFrame;
 
   // read data from COM pport
