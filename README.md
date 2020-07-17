@@ -20,14 +20,14 @@ CO2 Measurement Range: 0-2000ppm or 0-5000ppm. Accuracy: ±(50ppm+3%).
 
 - `SD_MHZ19B( Stream& serial )` - Class Constructor
 - `~SD_MHZ19B()` - Class Destructor
-- `uint16_t getPPM(void)` - read data from the module; returns value of CO2 concentration in ppm; Data are verified and valid (validate by calculating checkSum of the data received). Retunt `FALSE` i.e. ZERO value if communication or CRC error.
-- `int8_t getTemp(void)` - returns module temperature in degrees Celcium. Should be called after getPPM() function; otherwise will return a previous value. Rather inaccurate ±2*C; is used for internal compensation.
+- `uint16_t getPPM(void)` - reads data from the module; returns value of CO2 concentration in ppm; Data are verified and validated by calculating checkSum of the data received. Retunrs `FALSE` i.e. ZERO value if communication or CRC error occurs.
+- `int8_t getTemp(void)` - returns module temperature in degrees Celcium. Should be called after getPPM() function; otherwise returns a previous value. Rather inaccurate ±2*C; is used for internal compensation.
 - `void setAutoCalibration( bool _autoCalib )` - toggles Auto Calibration (Automatic Baseline Correction - ABC) ON/OFF. Set `true` for Enabled/ON; `false` for Disabled/OFF (default). Refer to Auto Calibration Notes below.
 - `bool getABCstatus(void)` - gets Auto Calibration ABC status (undocumented feature). Returns `true` for Enabled/ON, `false` - Disabled/OFF.
-- `void calibrateZeroPoint(void)` - calibrate Zero point. During the zero point calibration, the sensor must work in stable gas environment (400ppm) for over 20 minutes.
-- `bool calibrateSpanPoint( uint16_t _spanPoint )`- do `ZeroPoint` calibration before `Span` calibration. Make sure the sensor worked under a certain level co2 for over 20 minutes. Suggest using 2000ppm as span, at least 1000ppm. Default value is 2000ppm. Returns true if the requested Span value is OK.
+- `void calibrateZeroPoint(void)` - calibrates Zero point. During zero point calibration, the sensor must work in stable gas environment (400ppm) for over 20 minutes.
+- `bool calibrateSpanPoint( uint16_t _spanPoint )`- performs `Span` calibration. Do a `ZeroPoint` calibration before `Span` calibration. Make sure the sensor worked under a certain level co2 for over 20 minutes. Suggest using 2000ppm as span, at least 1000ppm. Default value is 2000ppm. Returns true if the requested Span value is OK.
 - `bool setDetectionRange( uint16_t _detectionRange )` - sets detection range, default is 0~2000ppm. The range could be 2,000-5,000ppm. Returns `true` if the requested range value is OK.
-- `uint8_t getStatus(void)` - Reads module status (undocumented feature), Returns 0 if OK; The value is available after successful getPPM() reading only; otherwise, will return previous value; to be called after getPPM(). 
+- `uint8_t getStatus(void)` - reads module status (undocumented feature), Returns 0 if OK; The value is available after successful getPPM() reading only; i.e. to be called after getPPM(). Otherwise, returns a previous value.
 
 For more details on the library use refer to the example that utilizes major library methods.
 
