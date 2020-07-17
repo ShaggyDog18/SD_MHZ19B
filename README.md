@@ -35,7 +35,7 @@ For more details on the library use refer to the example that utilizes major lib
 
 if Auto Calibration (Automatic Baseline Correction - ABC) is ON, the sensor itself performs a zero point judgment and automatic calibration procedure intelligently after a continuous operation period. The automatic calibration cycle is every 24 hours after powered on. The zero point for automatic calibration is **400ppm**. 
 
-This function is usually suitable for indoor air quality monitor such as offices and homes, not suitable for greenhouse, farm and refrigeratory where this function should be off. Please do zero calibration timely, such as manual or command calibration.
+This function is usually suitable for indoor air quality monitor such as offices and homes, not suitable for greenhouse, farm and refrigeratory where this function should be off.
 
 ## Safe levels of CO2
 
