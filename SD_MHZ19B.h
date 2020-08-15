@@ -52,6 +52,7 @@ The library developed for Arduino UNO, NANO, Pro Mini, ESP8266, etc.
 	#include "WProgram.h"
 #endif
 
+#define RANGE_TOP_LIMIT 5000  // in ppm, pre-defined for the MH-Z19B, refer to datasheet
 
 class SD_MHZ19B {
 public:

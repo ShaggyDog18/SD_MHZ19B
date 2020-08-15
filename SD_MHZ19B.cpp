@@ -55,7 +55,6 @@ extern "C" {
 #include <stdio.h>
 }
 
-#define RANGE_TOP_LIMIT 5000  // in ppm, pre-defined for the MH-Z19B, refer to datasheet
 
 /**
  * @brief Constructor for SD_MHZ19B class
