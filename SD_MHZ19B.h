@@ -113,7 +113,7 @@ Reads data from the module, fills in an internal data structure;
 Returns PPM value, verified and valid (validate by calculating checkSum of the data received).
 Return zero (false) if error during data read or CRC is not valid.
 */
-uint16_t getPPM();
+uint16_t getPPM(void);
 
 
 /*
@@ -122,17 +122,23 @@ Returns temperature value in degrees Celcium, verified and valid (validate by ca
 The value is available after successful getPPM() reading only; otherwise, returns previous value; to be called after getPPM() only.
 Rather inaccurate ±3*C; is used for internal compensation.
 */
-int8_t getTemp(void);
+int8_t getTemp(void) const {
+  return ((int8_t)_unionFrame.MHZ19B.temperature - 40);   // corrected temperature
+}
 
 // just to ensure compatibility
 #define getTemperature() getTemp()
+
 
 /*
 Reads module status - not documented, always return 0
 Returns status, verified and valid (validate by calculating checkSum of the data received).
 The value is available after successful getPPM() reading only; otherwise, will return previous value; to be called after getPPM() only.
 */
-uint8_t getStatus(void);
+// undocumented features
+uint8_t getStatus(void) const {
+  return _unionFrame.MHZ19B.status;
+}
 
 
 // experimental; undocumented; work in ptogress

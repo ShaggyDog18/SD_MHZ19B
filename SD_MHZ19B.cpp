@@ -115,19 +115,6 @@ uint16_t SD_MHZ19B::getDetectionRange(void) {   // last byte is a pre-calculated
 }
 
 
-// returns temperature in degrees Celcium. Should be called after getPPM() function; otherwise, will return a previous value.
-int8_t SD_MHZ19B::getTemp(void) {
-  return ((int8_t)_unionFrame.MHZ19B.temperature - 40);   // corrected temperature
-}
-
-
-// undocumented features
-// returns status of the module. Should be called after getPPM() function; otherwise, will return a previous value.
-uint8_t SD_MHZ19B::getStatus(void) {
-  return _unionFrame.MHZ19B.status;
-}
-
-
 /*
 // returns `Warming` status of the module (not documented, does not work). 
 bool SD_MHZ19::isWarming(void) {
@@ -212,10 +199,12 @@ bool SD_MHZ19B::_readData(void) {
   #endif
 
   // re-sort the buffer: swap high and low bytes since they are not in the "machine" order 
-  uint8_t tmp;
-  tmp = _unionFrame.buffer[2];
-  _unionFrame.buffer[2] = _unionFrame.buffer[3];
-  _unionFrame.buffer[3] = tmp;
+  {
+    uint8_t tmp;  // tmp does not exist outside of the {} scope
+    tmp = _unionFrame.buffer[2];
+    _unionFrame.buffer[2] = _unionFrame.buffer[3];
+    _unionFrame.buffer[3] = tmp;
+  }
 
   // Debug - print received buffer
   #ifdef DEBUG  
