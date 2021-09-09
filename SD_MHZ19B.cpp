@@ -242,7 +242,7 @@ uint8_t SD_MHZ19B::_calcCmdCheckSum( const uint8_t _cmd[] ) {
 
 
 void SD_MHZ19B::_sendCmd( const uint8_t _cmd[] ) {  // 4 bytes command
-  _serial.flush(); // clear buffer
+  _serial.flush(); // clear buffer, Waits for the transmission of outgoing serial data to complete
 
   // send command header
   _serial.write((uint8_t)0xFF); 
@@ -256,5 +256,5 @@ void SD_MHZ19B::_sendCmd( const uint8_t _cmd[] ) {  // 4 bytes command
   
   //send command tail/check value
   _serial.write( _cmd[3] );
-  _serial.flush(); // clear buffer
+  _serial.flush(); // clear buffer, Waits for the transmission of outgoing serial data to complete
 }
